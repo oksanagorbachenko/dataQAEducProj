@@ -12,14 +12,14 @@ def handler(event, cloudfront):
     business_test_suite_link = 'https://d35b8h21obf2t9.cloudfront.net/validations/' + business_test_suite_identifier + '.html'
     suites = [technic_test_suite, business_test_suite]
 
-    file_path = event[0]
-    match = re.search('.+(\/)(.*?).parquet', file_path)
+    # file_path = event[0]
+    match = re.search('.+(\/)(.*?).parquet', "data/housing/housing.parquet")
     file_name = re.search('[^_]*', match.group(2))
     file = file_name.group(0)
 
 
     result = {
-        "path": file_path,
+        # "path": file_path,
         "file": file,
         "profiling": profiling_link[-1],
         "technic_test_suite": technic_test_suite_link,

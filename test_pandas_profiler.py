@@ -6,13 +6,13 @@ import re
 
 
 def profile_data(event, runs):
-    file_path = event[0]
+    # file_path = event[0]
     s3 = boto3.resource("s3")
     bucket = s3.Bucket('fast-data-qa')
-    df = wr.s3.read_parquet(path='s3://fast-data-qa/' +file_path)
+    df = wr.s3.read_parquet(path='s3://fast-data-qa/data/housing/housing.parquet')
     profile = ProfileReport(df, title="Pandas Profiling Report", minimal=True)
     report = profile.to_html()
-    match = re.search('.+(\/)(.*?).parquet', file_path)
+    match = re.search('.+(\/)(.*?).parquet', "data/housing/housing.parquet")
     match_root_file_name = re.search('[^_]*', match.group(2))
     folder = match_root_file_name.group(0) + '/'
     links_result = []

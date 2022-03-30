@@ -6,14 +6,14 @@ BASE_DIR = Path(__file__).resolve().parent
 
 
 def validate_data(event, link):
-    file_path = event[0]
+    # file_path = event[0]
     context = DataContext(os.path.join(BASE_DIR, 'great_expectations'))
     expectation_suite_name = "housing_technic"
     suite = context.get_expectation_suite(expectation_suite_name)
     suite.expectations = []
 
     batch_kwargs = {'data_asset_name': 'housing', 'datasource': 'pandas_s3',
-                    'path': 's3a://fast-data-qa/' + file_path, 'link': link}
+                    'path': 's3a://fast-data-qa/' + "data/housing/housing.parquet", 'link': link}
     batch = context.get_batch(batch_kwargs, suite)
     batch.head()
 
